@@ -6,7 +6,7 @@ import  AddItemForm from './AddItemForm';
 import { AppBar, Button, IconButton, Typography, Toolbar, Container, Grid ,Paper} from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 
-type TodoListType = {
+export type TodoListType = {
     id:string,
     title:string,
     filter:FilterValuesType
@@ -36,7 +36,7 @@ function App() {
         ]
     })
 
-
+// funcs for tasks
     function removeTask(id: string, todolistId: string) {
         //достанем нужный массив по todolistId:
         let todolistTasks = tasks[todolistId];
@@ -45,7 +45,6 @@ function App() {
         // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         setTasks({...tasks});
     }
-
     function addTask(title: string, todolistId: string) {
         let task = {id: v1(), title: title, isDone: false};
         //достанем нужный массив по todolistId:
@@ -55,7 +54,6 @@ function App() {
         // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         setTasks({...tasks});
     }
-
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         //достанем нужный массив по todolistId:
         let todolistTasks = tasks[todolistId];
@@ -79,6 +77,7 @@ function App() {
             setTasks({...tasks});
         }
     }
+// funcs fot todolist
     function changeFilter(value: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(tl => tl.id === todolistId);
         if (todolist) {
@@ -86,7 +85,6 @@ function App() {
             setTodolists([...todolists])
         }
     }
-
     function removeTodolist(id: string) {
         // засунем в стейт список тудулистов, id которых не равны тому, который нужно выкинуть
         setTodolists(todolists.filter(tl => tl.id != id));
@@ -104,7 +102,7 @@ function App() {
         setTasks({...tasks,[newTodoListID]:[]})
     }
     function changeTodoListTitle(title: string, todolistId: string){
-          const todoList = todolists.find(tl=>tl.id === todolistId)
+        const todoList = todolists.find(tl=>tl.id === todolistId)
         if(todoList){
             todoList.title = title
             setTodolists([...todolists])
